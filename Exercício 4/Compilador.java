@@ -25,11 +25,21 @@ public class Compilador {
                 } else {
                     W = linha.split("=")[1].replace(";","");
                     try {
-                        x = Integer.parseInt(X);
-                        saida.write(Integer.toHexString(x).toUpperCase());
-                        y = Integer.parseInt(Y);
-                        saida.write(Integer.toHexString(y).toUpperCase());
+                        if(X.matches("[0-9]+")) {
+                            x = Integer.parseInt(X);
+                            saida.write(Integer.toHexString(x).toUpperCase());
+                        } else {
+                            saida.write(X);
+                        }
+                        if(Y.matches("[0-9]+")) {
+                            y = Integer.parseInt(Y);
+                            saida.write(Integer.toHexString(y).toUpperCase());
+                        } 
+                        else {
+                            saida.write(Y);
+                        }
                         saida.write(ProcurarMnemonico(W) + "\n");
+                        
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -48,13 +58,13 @@ public class Compilador {
     }
 
     public static String ProcurarMnemonico(String string) {
-        if(string.equals("0")) {
+        if(string.equals("zeroL")) {
             return "0";
-        } else if (string.equals("1")) {
+        } else if (string.equals("umL")) {
             return "1";
-        } else if (string.equals("A")) {
+        } else if (string.equals("copiaA")) {
             return "2";
-        } else if (string.equals("B")) {
+        } else if (string.equals("copiaB")) {
             return "3";
         } else if (string.equals("nA")) {
             return "4";

@@ -7,8 +7,8 @@ public class Compilador {
         
         try {
         //Abertura dos arquivos de escrita e leitura
-        BufferedReader arq = new BufferedReader(new FileReader("dados/dados.txt"));
-        FileWriter saida = new FileWriter("dados/saida.txt");
+        BufferedReader arq = new BufferedReader(new FileReader("dados/TESTEULA.ULA"));
+        FileWriter saida = new FileWriter("dados/TESTEULA.HEX");
 
         //String linha vai ler o arquivo de entrada linha por linha por meio do burfferedReader
         String linha, W = "", X = "", Y = "";
@@ -17,9 +17,9 @@ public class Compilador {
         while((linha = arq.readLine()) != null) {
             if(linha.equals("inicio:")) {
                 // Pula a primeira linha;
-            } else if (linha.charAt(0) == 'X') {
+            } else if (linha.charAt(0) == 'A') {
                 X = linha.split("=")[1].replace(";","");
-            } else if (linha.charAt(0) == 'Y') {
+            } else if (linha.charAt(0) == 'B') {
                 Y = linha.split("=")[1].replace(";","");
             } else if (linha.charAt(0) == 'W') {
                 if(X == "" || Y == "") {

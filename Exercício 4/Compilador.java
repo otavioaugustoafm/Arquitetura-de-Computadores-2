@@ -6,9 +6,11 @@ public class Compilador {
     public static void main(String[] args) {
         
         try {
-
+        //Abertura dos arquivos de escrita e leitura
         BufferedReader arq = new BufferedReader(new FileReader("dados/dados.txt"));
         FileWriter saida = new FileWriter("dados/saida.txt");
+
+        //String linha vai ler o arquivo de entrada linha por linha por meio do burfferedReader
         String linha, W = "", X = "", Y = "";
         int x = 0, y = 0;
 
@@ -21,23 +23,20 @@ public class Compilador {
                 Y = linha.split("=")[1].replace(";","");
             } else if (linha.charAt(0) == 'W') {
                 if(X == "" || Y == "") {
+                    //Verifica se X e Y tem algum valor prévio ao W
                     System.out.println("Erro, X ou Y não foram definidos antes da primeira operação.");
                 } else {
                     W = linha.split("=")[1].replace(";","");
                     try {
-                        if(X.matches("[0-9]+")) {
-                            x = Integer.parseInt(X);
-                            saida.write(Integer.toHexString(x).toUpperCase());
-                        } else {
-                            saida.write(X);
-                        }
-                        if(Y.matches("[0-9]+")) {
-                            y = Integer.parseInt(Y);
-                            saida.write(Integer.toHexString(y).toUpperCase());
-                        } 
-                        else {
-                            saida.write(Y);
-                        }
+                        //Aqui transformamos a string X em inteiro
+                        x = Integer.parseInt(X);
+                        //Aqui transformamos o valor inteiro em Hexadecimanl e depois em letra maiúscula
+                        saida.write(Integer.toHexString(x).toUpperCase());
+                        //Aqui transformamos a string Y em inteiro
+                        y = Integer.parseInt(Y);
+                        //Aqui transformamos o valor inteiro em Hexadecimanl e depois em letra maiúscula
+                        saida.write(Integer.toHexString(y).toUpperCase());
+                        //Aqui buscamos na função ProcurarMnemonico o valor hexadecimal correspondente
                         saida.write(ProcurarMnemonico(W) + "\n");
                         
                     } catch (Exception e) {
@@ -49,6 +48,7 @@ public class Compilador {
             }
         }
 
+        //Fecha os dois arquivos
         arq.close();
         saida.close();
 
@@ -57,6 +57,8 @@ public class Compilador {
         }
     }
 
+
+    //A string de parâmetro é o valor do W que recebemos na entrada. Ele será comparado com o código correspondente em hexadecimal
     public static String ProcurarMnemonico(String string) {
         if(string.equals("zeroL")) {
             return "0";
